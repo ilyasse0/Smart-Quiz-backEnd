@@ -1,0 +1,18 @@
+## Mail configuration
+#spring:
+#  mail:
+#    host: localhost
+#    port: 1025
+#    username: # leave empty for MailDev
+#    password: # leave empty for MailDev
+#    properties:
+#      mail:
+#        smtp:
+#          auth: false
+#          starttls:
+#            enable: false
+#
+## Your activation URL configuration
+#mailing:
+#  frontend:
+#    activation-url: http://localhost:4200/activate-account
