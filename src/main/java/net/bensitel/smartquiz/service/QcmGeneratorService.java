@@ -111,6 +111,10 @@ public class QcmGeneratorService {
         return dto;
     }
 
+    public QcmSet findById(Long qcmSetId) {
+        ///  todo add some filters later !
+        return qcmRepository.findById(qcmSetId).orElseThrow(() -> new RuntimeException("Problem with the qcm Id please check the config backend"));
+    }
 }
 
 

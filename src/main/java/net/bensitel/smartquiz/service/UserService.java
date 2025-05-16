@@ -17,4 +17,9 @@ public class UserService {
         return userRepository.findByUsername(userName).orElseThrow(() -> new RuntimeException("user not found"));
     }
 
+
+    public User getUserById(Long id){
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("user not found"));
+    }
+
 }
