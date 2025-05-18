@@ -1,10 +1,7 @@
 package net.bensitel.smartquiz.service;
 
 import lombok.RequiredArgsConstructor;
-import net.bensitel.smartquiz.dto.DocumentDto;
-import net.bensitel.smartquiz.dto.GeneratedQcm;
-import net.bensitel.smartquiz.dto.GeneratedQuestion;
-import net.bensitel.smartquiz.dto.QcmSetDtoToAttempt;
+import net.bensitel.smartquiz.dto.*;
 import net.bensitel.smartquiz.entity.*;
 import net.bensitel.smartquiz.mapper.DocumentMapper;
 import net.bensitel.smartquiz.repository.*;
@@ -16,6 +13,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +24,7 @@ public class QcmGeneratorService {
     private final DocumentMapper documentMapper;
     private final QuestionRepository questionRepository;
     private final OptionRepository optionRepository;
+
 
 
     public QcmSet saveGeneratedQcm(GeneratedQcm gqcm, User user, MultipartFile file) throws IOException {
@@ -114,6 +113,24 @@ public class QcmGeneratorService {
     public QcmSet findById(Long qcmSetId) {
         ///  todo add some filters later !
         return qcmRepository.findById(qcmSetId).orElseThrow(() -> new RuntimeException("Problem with the qcm Id please check the config backend"));
+    }
+
+    public  List<QcmByUserDto> findByCreatedBy(User user) {
+        List<QcmSet> qcms = qcmRepository.findByCreatedBy(user);
+        return qcms.stream().map(QcmByUserDto::fromEntity).collect(Collectors.toList());
+    }
+
+
+
+    public void makeQcmPublic(QcmSet qcm){
+         qcmRepository.save(qcm);
+    }
+
+
+    public List<QcmByUserDto> findPublicQcm() {
+        List<QcmSet> qcmPublic = qcmRepository.findByIsPublicTrue();
+        return qcmPublic.stream().map(QcmByUserDto :: fromEntity).collect(Collectors.toList());
+
     }
 }
 

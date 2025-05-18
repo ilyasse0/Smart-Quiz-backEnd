@@ -36,14 +36,15 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, DefaultAuthenticationEventPublisher eventPublisher) throws Exception {
         http
                 .cors(Customizer.withDefaults())
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**" , "/auth/**" , "/upload/**" ,"/document/**", "/generate/**"))
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**" , "/auth/**" , "/upload/**" ,"/document/**", "/generate/**" , "/api/attempts/**"))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**",
                                       "/h2-console/**",
                                         "/auth/**",
                                         "/document/**",
                                         "/upload/**",
-                                        "/generate/**"
+                                        "/generate/**",
+                                       "/api/attempts/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

@@ -38,13 +38,17 @@ public class AttemptService {
             Question question = questionRepository.findById(submission.getQuestionId())
                     .orElseThrow(() -> new RuntimeException("Question not found"));
 
-            boolean correct = submission.getSelectedOprion() == question.getCorrectOption();
+            boolean correct = Character.toUpperCase(submission.getSelectedOption()) == Character.toUpperCase(question.getCorrectOption());
+            System.out.println("debuging tools ------------------- in the AttemptService");
+            System.out.println("SelectedOption char code: " + (int)submission.getSelectedOption());
+            System.out.println("CorrectOption char code: " + (int)question.getCorrectOption());
+
             if (correct) score++;
 
             Answer answer = Answer.builder()
                     .attempt(attempt)
                     .question(question)
-                    .selectedOption(submission.getSelectedOprion())
+                    .selectedOption(submission.getSelectedOption())
                     .isCorrect(correct)
                     .build();
 

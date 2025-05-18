@@ -19,6 +19,6 @@ public class AttemptRequest {
     @NoArgsConstructor
     public static class AnswerSubmission {
         private Long questionId;
-        private char selectedOprion;
+        private char selectedOption;
     }
 }

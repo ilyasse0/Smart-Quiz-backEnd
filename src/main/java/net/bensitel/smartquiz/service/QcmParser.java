@@ -15,10 +15,10 @@ import java.util.regex.Pattern;
 @Component
 public class QcmParser {
 
-    public GeneratedQcm parse(String rawText) {
+    public GeneratedQcm parse(String rawText , String title , String topic) {
         GeneratedQcm qcm = new GeneratedQcm();
-        qcm.setTitle("QCM Auto Generated");
-        qcm.setTopic("Auto Topic");
+        qcm.setTitle(title);
+        qcm.setTopic(topic);
 
         List<GeneratedQuestion> questions = new ArrayList<>();
 

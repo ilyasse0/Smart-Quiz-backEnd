@@ -21,6 +21,9 @@ public class QcmSet {
 
     private String topic;
 
+    @Column(nullable = true)
+    private boolean isPublic;
+
     @ManyToOne
     @JoinColumn(name = "document_id")
     private Document  document;
